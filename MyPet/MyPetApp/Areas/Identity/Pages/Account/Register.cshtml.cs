@@ -49,6 +49,23 @@ namespace MyPetApp.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Username")]
             public string Username { get; set; }
+
+            [Required]
+            [Display(Name = "FirstName")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "LastName")]
+            public string LastName { get; set; }
+
+            [Required]
+            [Display(Name = "Adress")]
+            public string Adress { get; set; }
+
+            [Required]
+            [Display(Name = "PhoneNumber")]
+            public string PhoneNumber { get; set; }
+
             [Required]
             [EmailAddress]
             [Display(Name ="Email")]
@@ -79,7 +96,7 @@ namespace MyPetApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Username, Email = Input.Email };
+                var user = new ApplicationUser { UserName = Input.Username, FirstName= Input.FirstName, LastName=Input.LastName, Adress = Input.Adress, PhoneNumber=Input.PhoneNumber, Email = Input.Email  };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

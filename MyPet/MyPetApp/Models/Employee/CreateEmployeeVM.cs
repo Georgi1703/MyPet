@@ -28,8 +28,5 @@ namespace MyPetApp.Models.Employee
         [Required]
         [MaxLength(10)]
         public string Phone { get; set; }
-        [Required]
-        [MaxLength(30)]
     }
-
 }
