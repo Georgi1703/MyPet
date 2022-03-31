@@ -15,10 +15,9 @@ namespace MyPetApp.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+        [MaxLength(30)]
         public string Name { get; set; }
-        [Required]
-        [StringLength(15, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 8)]
+  
         public virtual ICollection<Product> Products { get; set; }
     }
 }

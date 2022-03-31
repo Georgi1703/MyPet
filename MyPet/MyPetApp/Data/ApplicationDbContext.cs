@@ -14,8 +14,8 @@ namespace MyPetApp.Data
         {
             this.Database.EnsureCreated();
         }
-        public DbSet<Product> Product { get; set; }
-        public DbSet<Category> Category { get; set; }
-        public DbSet<Reservation> Reservation { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categorires { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }

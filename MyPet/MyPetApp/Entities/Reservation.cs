@@ -8,6 +8,7 @@ namespace MyPetApp.Entities
 {
     public class Reservation
     {
+        [Key]
         public int Id { get; set; }
         public DateTime CreatedOn { get; set; }
 
@@ -18,5 +19,7 @@ namespace MyPetApp.Entities
         public int productId { get; set; }
         public virtual Product Product { get; set; }
         public int CountOfProduct { get; set; }
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

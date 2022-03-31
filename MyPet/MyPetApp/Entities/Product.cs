@@ -8,14 +8,18 @@ namespace MyPetApp.Entities
 {
     public class Product
     {
+        public Product()
+        {
+             this.Reservations = new HashSet<Reservation>();
+        }
         public int Id { get; set; }
 
         [Required]
-        [StringLength(10, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [MaxLength(30)]
         public string NumberItem { get; set; }
         
         [Required]
-        [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
+        [MaxLength(30)]
         public string Name { get; set; }
        
        
@@ -23,10 +27,12 @@ namespace MyPetApp.Entities
         public virtual Category Category { get; set; }
        
         [Required]
-        [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 10)]public string Description { get; set; }
+        [MaxLength(100)]
+        public string Description { get; set; }
         
         public string Image { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
     }
 }
