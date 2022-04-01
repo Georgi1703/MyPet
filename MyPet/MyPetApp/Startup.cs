@@ -31,7 +31,8 @@ namespace MyPetApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
+            options.UseLazyLoadingProxies()    
+                .UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
 
@@ -59,7 +60,7 @@ namespace MyPetApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.PrepareDatabase();
+            app.PrepareDatabase().Wait();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
