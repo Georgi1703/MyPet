@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using MyPetApp.Data;
 using MyPetApp.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace MyPetApp.Infrastructure
             using var serviceScope = app.ApplicationServices.CreateScope();
 
             var services = serviceScope.ServiceProvider;
+            var data = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            SeedCategories(data);
 
             await RoleSeeder(services);
             await SeedAdministrator(services);
@@ -62,6 +65,22 @@ namespace MyPetApp.Infrastructure
                     userManager.AddToRoleAsync(user, "Administrator").Wait();
                 }
             }
+        }
+        private static void SeedCategories(ApplicationDbContext data)
+        {
+            if (data.Categories.Any()) 
+            {
+                return;
+            }
+            data.Categories.AddRange(new[]
+            {
+                new Category {Name="Papagal"},
+                new Category {Name="Kuche"},
+                new Category {Name="Kotka"},
+                new Category {Name="Zaek"},
+                new Category {Name="Ribki"},
+            });
+            data.SaveChanges();
         }
 
     }
