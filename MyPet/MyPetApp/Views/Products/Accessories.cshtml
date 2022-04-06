@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MyPetApp.Entities.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Accessories";
 }
 
-<h1>Index</h1>
+<h1>Accessories</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -52,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <img src="@Html.DisplayFor(modelItem => item.Image)" alt="Image" width="100" />
+                @Html.DisplayFor(modelItem => item.Image)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)

@@ -16,7 +16,7 @@ namespace MyPetApp.Entities
         [MinLength(10)]
         [MaxLength(50)]
 
-        public int productId { get; set; }
+        public int ProductId { get; set; }
         public virtual Product Product { get; set; }
         public int CountOfProduct { get; set; }
         public string UserId { get; set; }

@@ -26,6 +26,17 @@ namespace MyPetApp.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: Products-pets
+        public async Task<IActionResult> Pets()
+        {
+            var applicationDbContext = _context.Products.Include(p => p.Category).Where(p=>p.Category.Name!="Аксесоари");
+            return View(await applicationDbContext.ToListAsync());
+        }
+        public async Task<IActionResult> Accessories()
+        {
+            var applicationDbContext = _context.Products.Include(p => p.Category).Where(p => p.Category.Name == "Аксесоари");
+            return View(await applicationDbContext.ToListAsync());
+        }
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -25,6 +25,11 @@ namespace MyPetApp.Controllers
             var applicationDbContext = _context.Reservations.Include(r => r.Product).Include(r => r.User);
             return View(await applicationDbContext.ToListAsync());
         }
+        public async Task<IActionResult> Reservations()
+        {
+            var applicationDbContext = _context.Products.Include(p => p.Category).Where(p => p.Category.Name == "Аксесоари");
+            return View(await applicationDbContext.ToListAsync());
+        }
 
         // GET: Reservations/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -49,7 +54,7 @@ namespace MyPetApp.Controllers
         // GET: Reservations/Create
         public IActionResult Create()
         {
-            ViewData["productId"] = new SelectList(_context.Products, "Id", "Description");
+            ViewData["productId"] = new SelectList(_context.Products, "Id", "Id");
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
@@ -67,7 +72,7 @@ namespace MyPetApp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["productId"] = new SelectList(_context.Products, "Id", "Description", reservation.productId);
+            ViewData["productId"] = new SelectList(_context.Products, "Id", "Id", reservation.ProductId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", reservation.UserId);
             return View(reservation);
         }
@@ -85,7 +90,7 @@ namespace MyPetApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["productId"] = new SelectList(_context.Products, "Id", "Description", reservation.productId);
+            ViewData["productId"] = new SelectList(_context.Products, "Id", "Description", reservation.ProductId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", reservation.UserId);
             return View(reservation);
         }
@@ -122,7 +127,7 @@ namespace MyPetApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["productId"] = new SelectList(_context.Products, "Id", "Description", reservation.productId);
+            ViewData["productId"] = new SelectList(_context.Products, "Id", "Description", reservation.ProductId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", reservation.UserId);
             return View(reservation);
         }

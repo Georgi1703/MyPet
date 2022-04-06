@@ -58,7 +58,7 @@ namespace MyPetApp.Infrastructure
                 user.Email = "admin@admin.com";
 
                 var result = await userManager.CreateAsync
-                (user, "123!@#qweQWE");
+                (user, "123456");
 
                 if (result.Succeeded)
                 {
@@ -74,11 +74,12 @@ namespace MyPetApp.Infrastructure
             }
             data.Categories.AddRange(new[]
             {
-                new Category {Name="Papagal"},
-                new Category {Name="Kuche"},
-                new Category {Name="Kotka"},
-                new Category {Name="Zaek"},
-                new Category {Name="Ribki"},
+                new Category {Name="Папагали"},
+                new Category {Name="Кучета"},
+                new Category {Name="Котки"},
+                new Category {Name="Зайци"},
+                new Category {Name="Рибки"},
+                new Category {Name="Аксесоари"},
             });
             data.SaveChanges();
         }
