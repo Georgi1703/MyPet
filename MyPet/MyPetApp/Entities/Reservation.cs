@@ -13,9 +13,7 @@ namespace MyPetApp.Entities
         public DateTime CreatedOn { get; set; }
 
         [Required]
-        [MinLength(10)]
-        [MaxLength(50)]
-
+       
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
         public int CountOfProduct { get; set; }

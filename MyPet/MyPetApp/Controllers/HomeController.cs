@@ -22,6 +22,14 @@ namespace MyPetApp.Controllers
         {
             return View();
         }
+        public IActionResult ForUs()
+        {
+            return View();
+        }
+        public IActionResult Contacts()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
