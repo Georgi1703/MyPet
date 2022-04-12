@@ -79,6 +79,9 @@ namespace MyPetApp.Infrastructure
                 new Category {Name="Котки"},
                 new Category {Name="Зайци"},
                 new Category {Name="Рибки"},
+                new Category {Name="Хамстери"},
+                new Category {Name="Костенурки"},
+                new Category {Name="Змии"},
                 new Category {Name="Аксесоари"},
             });
             data.SaveChanges();
