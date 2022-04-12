@@ -2,51 +2,5 @@
 @{
     ViewData["Title"] = "Contacts";
 }
-<head>
-    <body>
-        <h1>За контакти</h1>
-        <address>
-            <div class="title">Е-мейл Адреси</div>
-            <p>За контакти: <a href="admin@admin.com">admin@admin.com</a></p>
-        </address>
-        <label class="h2 legend" style="margin-top:20px; float: left; width: 100%;">Пишете ни</label>
-        <div class="fieldset">
-            <ul class="form-list">
-                <li class="fields">
-                    <div class="field">
-                        <label for="name" class="required">Име</label>
-                        <div class="input-box">
-                            <input class="input-text required-entry" type="text" name="name" value="" required="" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Моля, въведете Име')" onkeyup="filterChars(this)">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label for="email" class="required">Е-мейл Адрес</label>
-                        <div class="input-box">
-                            <input class="input-text" type="email" pattern="^[a-zA-Z0-9.!#$%&amp;’*+/=?^_`{|}~-]+[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" name="email" value="" required="" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Не сте въвели валиден email адрес.')" onkeyup="filterEmail(this)">
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="field">
-                        <label>Телефон</label>
-                        <div class="input-box">
-                            <input class="input-text" type="text" name="phone" value="" onkeyup="filterPhone(this)">
-                        </div>
-                    </div>
-                </li>
-                <li class="wide">
-                    <div class="field">
-                        <label for="comment" class="required">Текст</label>
-                        <div class="input-box">
-                            <textarea class="required-entry input-text" name="text" required="" oninput="setCustomValidity('')" oninvalid="this.setCustomValidity('Моля, въведете текст')"></textarea>
-                        </div>
-                    </div>
-                </li>
-                <button class="button" type="type" onclick="submitForm(this)">
-                    <span>Изпрати</span>
-                </button>
-
-    </body>
-</head>
 
 
