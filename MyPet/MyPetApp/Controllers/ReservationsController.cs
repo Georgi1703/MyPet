@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -23,11 +24,6 @@ namespace MyPetApp.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Reservations.Include(r => r.Product).Include(r => r.User);
-            return View(await applicationDbContext.ToListAsync());
-        }
-        public async Task<IActionResult> Reservations()
-        {
-            var applicationDbContext = _context.Products.Include(p => p.Category).Where(p => p.Category.Name == "Аксесоари");
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -54,8 +50,9 @@ namespace MyPetApp.Controllers
         // GET: Reservations/Create
         public IActionResult Create()
         {
-            ViewData["productId"] = new SelectList(_context.Products, "Id", "Id");
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name");
+           // ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+
             return View();
         }
 
@@ -64,15 +61,18 @@ namespace MyPetApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CreatedOn,productId,CountOfProduct,UserId")] Reservation reservation)
+        public async Task<IActionResult> Create([Bind("Id,CreatedOn,ProductId,CountOfProduct,UserId")] Reservation reservation)
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+                reservation.UserId = userId;
+                reservation.CreatedOn = DateTime.Now;
                 _context.Add(reservation);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["productId"] = new SelectList(_context.Products, "Id", "Id", reservation.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", reservation.ProductId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", reservation.UserId);
             return View(reservation);
         }
@@ -90,7 +90,7 @@ namespace MyPetApp.Controllers
             {
                 return NotFound();
             }
-            ViewData["productId"] = new SelectList(_context.Products, "Id", "Description", reservation.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description", reservation.ProductId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", reservation.UserId);
             return View(reservation);
         }
@@ -100,7 +100,7 @@ namespace MyPetApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedOn,productId,CountOfProduct,UserId")] Reservation reservation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CreatedOn,ProductId,CountOfProduct,UserId")] Reservation reservation)
         {
             if (id != reservation.Id)
             {
@@ -127,7 +127,7 @@ namespace MyPetApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["productId"] = new SelectList(_context.Products, "Id", "Description", reservation.ProductId);
+            ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description", reservation.ProductId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", reservation.UserId);
             return View(reservation);
         }

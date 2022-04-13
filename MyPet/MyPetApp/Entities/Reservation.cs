@@ -16,6 +16,7 @@ namespace MyPetApp.Entities
        
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
+        [Required]
         public int CountOfProduct { get; set; }
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
