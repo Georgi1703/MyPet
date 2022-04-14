@@ -58,7 +58,8 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Stock)
+                @if(item.Stock > 0) {<p>Наличен</p>} 
+                @if(item.Stock == 0) { <p>Резервиран</p>}
             </td>
             <td>
                

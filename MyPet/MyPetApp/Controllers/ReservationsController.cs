@@ -68,9 +68,16 @@ namespace MyPetApp.Controllers
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 reservation.UserId = userId;
                 reservation.CreatedOn = DateTime.Now;
-                _context.Add(reservation);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var product = _context.Products.Find(reservation.ProductId);
+                if (product.Stock - reservation.CountOfProduct>=0);
+                {
+                    product.Stock -= reservation.CountOfProduct;
+                    _context.Add(reservation);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return RedirectToAction("Denied");
+      
             }
             ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name", reservation.ProductId);
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", reservation.UserId);
@@ -158,6 +165,9 @@ namespace MyPetApp.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var reservation = await _context.Reservations.FindAsync(id);
+            var product = _context.Products.Find(reservation.ProductId);
+            
+                product.Stock += reservation.CountOfProduct;
             _context.Reservations.Remove(reservation);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
