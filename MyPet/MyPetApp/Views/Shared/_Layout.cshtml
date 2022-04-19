@@ -32,8 +32,21 @@
                         </li>
                         @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Client")))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Reservations" asp-action="My"> Резервации</a>
+                            <li class="nav-item active">
+                                <div class="dropdown show">
+                                    <a class="nav-link active dropdown-toggle" href="#"
+                                       id="dropdownMenuLink"
+                                       data-toggle="dropdown"
+                                       aria-haspopup="true"
+                                       aria-expanded="false">
+                                        Резервации
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="/Reservations/Create">Добавяне</a>
+                                        <a class="dropdown-item" href="/Reservations/My">моите резервации</a>
+                                    </div>
+                                </div>
                             </li>
                         }
                         <li class="nav-item">
