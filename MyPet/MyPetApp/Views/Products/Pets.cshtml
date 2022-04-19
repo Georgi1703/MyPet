@@ -59,7 +59,7 @@
             </td>
             <td>
                 @if(item.Stock > 0) {<p>Наличен</p>} 
-                @if(item.Stock == 0) { <p>Резервиран</p>}
+                @if(item.Stock <= 0) { <p>Резервиран</p>}
             </td>
             <td>
                
